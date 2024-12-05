@@ -1,0 +1,40 @@
+my sql db configuration for this project 
+CREATE TABLE Student (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE
+);
+
+CREATE TABLE Course (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    course_name VARCHAR(100) NOT NULL,
+    course_code VARCHAR(20) NOT NULL UNIQUE
+);
+CREATE TABLE Enrollment (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    student_id BIGINT,
+    course_id BIGINT,
+    FOREIGN KEY (student_id) REFERENCES Student(id),
+    FOREIGN KEY (course_id) REFERENCES Course(id)
+);
+
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    roleid INT NOT NULL
+);
+
+
+CREATE TABLE roles (
+    role_id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    role_name VARCHAR(20) NOT NULL
+);
+
+CREATE TABLE users (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    role_id BIGINT,
+    FOREIGN KEY (role_id) REFERENCES roles(role_id) ON DELETE CASCADE
+);
